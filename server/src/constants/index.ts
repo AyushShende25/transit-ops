@@ -37,6 +37,15 @@ export const TRIP_STATUS = [
 
 export type TripStatus = (typeof TRIP_STATUS)[number];
 
+export const EXPENSE_TYPES = [
+	"TOLL",
+	"MAINTENANCE",
+	"PARKING",
+	"OTHER",
+] as const;
+
+export type ExpenseStatus = (typeof EXPENSE_TYPES)[number];
+
 export const cookieOptions: CookieOptions = {
 	httpOnly: true,
 	secure: config.NODE_ENV === "production",

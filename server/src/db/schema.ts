@@ -10,6 +10,7 @@ import {
 } from "drizzle-orm/pg-core";
 import {
 	DRIVER_STATUS,
+	EXPENSE_TYPES,
 	ROLES,
 	TRIP_STATUS,
 	VEHICLE_STATUS,
@@ -52,7 +53,7 @@ export const vehiclesTable = pgTable("vehicles", {
 	maxLoadInKg: integer("max_load_in_kg").notNull(),
 	currentOdometer: integer("current_odometer").notNull(),
 	acquisitionCost: integer("acquisition_cost").notNull(),
-	acquisitionDate: date("acquisition_date").notNull(),
+	acquisitionDate: date("acquisition_date", { mode: "date" }).notNull(),
 	region: varchar({ length: 255 }).notNull(),
 	status: vehicleStatusEnum().notNull(),
 	...timestamps,
@@ -64,7 +65,7 @@ export const driversTable = pgTable("drivers", {
 	id: uuid("id").primaryKey().defaultRandom(),
 	licenseNumber: varchar("license_number", { length: 255 }).notNull().unique(),
 	licenseCategory: varchar("license_category", { length: 255 }).notNull(),
-	licenseExpiry: date("license_expiry").notNull(),
+	licenseExpiry: date("license_expiry", { mode: "date" }).notNull(),
 	contactNumber: varchar("contact_number", { length: 255 }).notNull(),
 	safetyScore: integer("safety_score").notNull(),
 	status: driverStatusEnum().notNull(),
@@ -121,9 +122,12 @@ export const maintainanceLogsTable = pgTable("maintainence_logs", {
 		.references(() => vehiclesTable.id, {
 			onDelete: "cascade",
 		}),
-	cost: integer().notNull(),
+	cost: integer().notNull().default(0),
 	description: text(),
-	status: maintainanceStatusEnum(),
+	status: maintainanceStatusEnum().notNull().default('ACTIVE'),
+	completedAt: timestamp("completed_at", {
+		withTimezone: true,
+	}),
 	...timestamps,
 });
 
@@ -139,10 +143,12 @@ export const fuelLogsTable = pgTable("fuel_logs", {
 	}),
 	litres: integer().notNull(),
 	cost: integer().notNull(),
-	fuelDate: date("fuel_date").notNull(),
+	fuelDate: date("fuel_date", { mode: "date" }).notNull(),
 	odometer: integer("odometer").notNull(),
 	...timestamps,
 });
+
+export const expenseTypeEnum = pgEnum("expense_type", EXPENSE_TYPES);
 
 export const expensesTable = pgTable("expenses", {
 	id: uuid("id").primaryKey().defaultRandom(),
@@ -156,6 +162,9 @@ export const expensesTable = pgTable("expenses", {
 	}),
 	amount: integer().notNull(),
 	description: text(),
-	expenseDate: date("fuel_date").notNull(),
+	expenseDate: date("expense_date", { mode: "date" }).notNull(),
+	type: expenseTypeEnum()
+		.notNull()
+		.default("OTHER"),
 	...timestamps,
 });

@@ -4,7 +4,7 @@ import { ForbiddenError } from "../errors/forbidden";
 import { UnAuthorizedError } from "../errors/un-authorized";
 
 export const authorize =
-	async (roles: Role[]) =>
+	(...roles: Role[]) =>
 	(req: Request, _res: Response, next: NextFunction) => {
 		if (!req.user) throw new UnAuthorizedError();
 

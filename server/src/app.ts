@@ -6,6 +6,7 @@ import { NotFoundError } from "./errors/not-found";
 import { errorHandler } from "./middlewares/error-handler";
 import morgan from "./middlewares/morgan";
 import authRoutes from "./modules/auth/router";
+import vehicleRoutes from "./modules/vehicle/router";
 
 export const createApp = (): Application => {
 	const app = express();
@@ -19,6 +20,7 @@ export const createApp = (): Application => {
 	});
 
 	app.use("/api/auth", authRoutes);
+	app.use("/api/vehicles", vehicleRoutes);
 
 	app.all("*splat", () => {
 		throw new NotFoundError("Resource not found");

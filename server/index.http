@@ -8,10 +8,10 @@ POST {{baseUrl}}/api/auth/register
 Content-Type: application/json
 
 {
-  "email":"test@test.com",
+  "email":"test2@test.com",
   "name":"testuser",
   "password":"test1234",
-  "role":"DRIVER"
+  "role":"FLEET_MANAGER"
 }
 
 ### Login
@@ -23,7 +23,43 @@ Content-Type: application/json
   "password":"test1234"
 }
 
-
-
 ### Logout
 POST {{baseUrl}}/api/auth/logout
+
+@baseUrl = http://localhost:5000
+
+
+### Get All Vehicles
+GET {{baseUrl}}/api/vehicles?status=AVAILABLE&type=Van&region=North
+
+### Create Vehicle
+POST {{baseUrl}}/api/vehicles
+Content-Type: application/json
+
+{
+  "registrationNumber":"MH12AB1234",
+  "name":"Van-01",
+  "model":"Force Traveller",
+  "type":"Van",
+  "maxLoadInKg":500,
+  "currentOdometer":12000,
+  "acquisitionCost":1200000,
+  "acquisitionDate":"2025-01-01",
+  "region":"North",
+  "status":"AVAILABLE"
+}
+
+### Get Vehicle By Id
+GET {{baseUrl}}/api/vehicles/62d01780-ba8a-4e82-9ac0-a9ee925c6402
+
+### Update Vehicle
+PATCH {{baseUrl}}/api/vehicles/62d01780-ba8a-4e82-9ac0-a9ee925c6402
+Content-Type: application/json
+
+{
+  "currentOdometer":12500,
+  "region":"West"
+}
+
+### Delete Vehicle
+DELETE {{baseUrl}}/api/vehicles/62d01780-ba8a-4e82-9ac0-a9ee925c6402

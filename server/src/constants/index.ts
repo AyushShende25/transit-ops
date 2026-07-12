@@ -10,6 +10,15 @@ export const ROLES = [
 
 export type Role = (typeof ROLES)[number];
 
+export const VEHICLE_STATUS = [
+	"AVAILABLE",
+	"ON_TRIP",
+	"IN_SHOP",
+	"RETIRED",
+] as const;
+
+export type VehicleStatus = (typeof VEHICLE_STATUS)[number];
+
 export const cookieOptions: CookieOptions = {
 	httpOnly: true,
 	secure: config.NODE_ENV === "production",

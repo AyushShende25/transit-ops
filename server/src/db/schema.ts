@@ -8,7 +8,12 @@ import {
 	uuid,
 	varchar,
 } from "drizzle-orm/pg-core";
-import { DRIVER_STATUS, ROLES, VEHICLE_STATUS } from "../constants";
+import {
+	DRIVER_STATUS,
+	ROLES,
+	TRIP_STATUS,
+	VEHICLE_STATUS,
+} from "../constants";
 
 // Entities: Users, Roles, Vehicles, Drivers, Trips, Maintenance Logs, Fuel Logs, Expenses
 // Roles: Fleet Manager, Driver, Safety Officer, Financial Analyst
@@ -69,12 +74,7 @@ export const driversTable = pgTable("drivers", {
 	...timestamps,
 });
 
-export const tripStatusEnum = pgEnum("trip_status", [
-	"DRAFT",
-	"DISPATCHED",
-	"COMPLETED",
-	"CANCELLED",
-]);
+export const tripStatusEnum = pgEnum("trip_status", TRIP_STATUS);
 
 export const tripsTable = pgTable("trips", {
 	id: uuid("id").primaryKey().defaultRandom(),
@@ -82,10 +82,20 @@ export const tripsTable = pgTable("trips", {
 	destination: varchar({ length: 255 }).notNull(),
 	cargoWeightInKg: integer("cargo_weight_in_kg").notNull(),
 	plannedDistanceInKm: integer("planned_distance_in_km").notNull(),
-	actualDistanceInKm: integer("actual_distance_in_km").notNull(),
+	actualDistanceInKm: integer("actual_distance_in_km"),
 	startOdometer: integer("start_odometer").notNull(),
-	endOdometer: integer("end_odometer").notNull(),
-	status: tripStatusEnum(),
+	endOdometer: integer("end_odometer"),
+	revenue: integer("revenue").notNull().default(0),
+	status: tripStatusEnum().notNull().default("DRAFT"),
+	dispatchedAt: timestamp("dispatched_at", {
+		withTimezone: true,
+	}),
+	completedAt: timestamp("completed_at", {
+		withTimezone: true,
+	}),
+	cancelledAt: timestamp("cancelled_at", {
+		withTimezone: true,
+	}),
 	vehicleId: uuid("vehicle_id")
 		.notNull()
 		.references(() => vehiclesTable.id, {
@@ -93,7 +103,9 @@ export const tripsTable = pgTable("trips", {
 		}),
 	driverId: uuid("driver_id")
 		.notNull()
-		.references(() => driversTable.id, { onDelete: "cascade" }),
+		.references(() => driversTable.id, {
+			onDelete: "cascade",
+		}),
 	...timestamps,
 });
 

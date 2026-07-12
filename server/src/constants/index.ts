@@ -28,6 +28,15 @@ export const DRIVER_STATUS = [
 
 export type DriverStatus = (typeof DRIVER_STATUS)[number];
 
+export const TRIP_STATUS = [
+	"DRAFT",
+	"DISPATCHED",
+	"COMPLETED",
+	"CANCELLED",
+] as const;
+
+export type TripStatus = (typeof TRIP_STATUS)[number];
+
 export const cookieOptions: CookieOptions = {
 	httpOnly: true,
 	secure: config.NODE_ENV === "production",

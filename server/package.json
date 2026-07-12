@@ -1,0 +1,46 @@
+{
+  "name": "@transit-ops/server",
+  "version": "0.1.0",
+  "description": "Api for tansit-ops",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/server.ts",
+    "build": "tsdown",
+    "start": "node --env-file=.env dist/server.js",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "check": "npx @biomejs/biome check --write",
+    "lint": "npx @biomejs/biome lint --write",
+    "format": "npx @biomejs/biome format --write",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push"
+  },
+  "author": "Ayush Shende",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^1.0.0-rc.4",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.22.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.3",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.1.1",
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^1.0.0-rc.4",
+    "tsdown": "^0.22.5",
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2"
+  }
+}

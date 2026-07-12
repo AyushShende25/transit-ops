@@ -1,11 +1,10 @@
-import { Application } from "express";
-import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import express, { type Application } from "express";
 import { config } from "./config/env";
-import morgan from './middlewares/morgan'
 import { NotFoundError } from "./errors/not-found";
 import { errorHandler } from "./middlewares/error-handler";
+import morgan from "./middlewares/morgan";
 
 export const createApp = (): Application => {
 	const app = express();

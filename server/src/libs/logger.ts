@@ -35,8 +35,7 @@ const consoleFormat = winston.format.combine(
 	winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss:ms" }),
 	winston.format.align(),
 	winston.format.printf(
-		({ timestamp, level, message }) =>
-			`${timestamp} ${level}: ${message}`,
+		({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`,
 	),
 );
 
@@ -44,8 +43,7 @@ const fileFormat = winston.format.combine(
 	winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss:ms" }),
 	winston.format.align(),
 	winston.format.printf(
-		({ timestamp, level, message }) =>
-			`${timestamp} ${level}: ${message}`,
+		({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`,
 	),
 );
 
@@ -67,9 +65,8 @@ const transports = [
 	}),
 ];
 
-export const logger = 
-	winston.createLogger({
-		level: level(),
-		levels,
-		transports,
-	});
+export const logger = winston.createLogger({
+	level: level(),
+	levels,
+	transports,
+});

@@ -1,21 +1,14 @@
 {
-  "$schema": "https://www.schemastore.org/tsconfig",
-  "_version": "22.0.0",
-  "compilerOptions": {
-    "lib": [
-      "es2024",
-      "ESNext.Array",
-      "ESNext.Collection",
-      "ESNext.Iterator"
-    ],
-    "target": "es2022",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
-  }
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"_version": "22.0.0",
+	"compilerOptions": {
+		"lib": ["es2024", "ESNext.Array", "ESNext.Collection", "ESNext.Iterator"],
+		"target": "es2022",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"types": ["node"]
+	}
 }

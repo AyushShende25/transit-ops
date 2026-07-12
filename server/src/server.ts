@@ -3,7 +3,6 @@ import { config } from "./config/env";
 import { logger } from "./libs/logger";
 
 const bootstrap = async () => {
-
 	const app = createApp();
 
 	const server = app.listen(config.PORT, () => {

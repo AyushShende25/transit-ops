@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:17
+    container_name: transitops-db
+    environment:
+      - POSTGRES_USER=transitops_admin
+      - POSTGRES_PASSWORD=transitops_admin
+      - POSTGRES_DB=transitops_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - transitops-network
+
+volumes:
+  pgdata:
+
+networks:
+  transitops-network:

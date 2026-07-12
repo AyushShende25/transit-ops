@@ -8,11 +8,14 @@
       "ESNext.Collection",
       "ESNext.Iterator"
     ],
-    "module": "nodenext",
     "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node16"
+    "types": [
+      "node"
+    ],
   }
 }

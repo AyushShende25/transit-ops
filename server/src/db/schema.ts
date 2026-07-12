@@ -8,7 +8,7 @@ import {
 	uuid,
 	varchar,
 } from "drizzle-orm/pg-core";
-import { ROLES, VEHICLE_STATUS } from "../constants";
+import { DRIVER_STATUS, ROLES, VEHICLE_STATUS } from "../constants";
 
 // Entities: Users, Roles, Vehicles, Drivers, Trips, Maintenance Logs, Fuel Logs, Expenses
 // Roles: Fleet Manager, Driver, Safety Officer, Financial Analyst
@@ -53,12 +53,7 @@ export const vehiclesTable = pgTable("vehicles", {
 	...timestamps,
 });
 
-export const driverStatusEnum = pgEnum("driver_status", [
-	"AVAILABLE",
-	"ON_TRIP",
-	"OFF_DUTY",
-	"SUSPENDED",
-]);
+export const driverStatusEnum = pgEnum("driver_status", DRIVER_STATUS);
 
 export const driversTable = pgTable("drivers", {
 	id: uuid("id").primaryKey().defaultRandom(),

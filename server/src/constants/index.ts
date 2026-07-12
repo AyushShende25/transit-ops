@@ -19,6 +19,15 @@ export const VEHICLE_STATUS = [
 
 export type VehicleStatus = (typeof VEHICLE_STATUS)[number];
 
+export const DRIVER_STATUS = [
+	"AVAILABLE",
+	"ON_TRIP",
+	"OFF_DUTY",
+	"SUSPENDED",
+] as const;
+
+export type DriverStatus = (typeof DRIVER_STATUS)[number];
+
 export const cookieOptions: CookieOptions = {
 	httpOnly: true,
 	secure: config.NODE_ENV === "production",

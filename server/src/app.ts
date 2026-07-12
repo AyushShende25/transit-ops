@@ -5,6 +5,7 @@ import { config } from "./config/env";
 import { NotFoundError } from "./errors/not-found";
 import { errorHandler } from "./middlewares/error-handler";
 import morgan from "./middlewares/morgan";
+import authRoutes from "./modules/auth/router";
 
 export const createApp = (): Application => {
 	const app = express();
@@ -16,6 +17,8 @@ export const createApp = (): Application => {
 	app.get("/health", (_req, res) => {
 		res.json({ success: true, message: "OK" });
 	});
+
+	app.use("/api/auth", authRoutes);
 
 	app.all("*splat", () => {
 		throw new NotFoundError("Resource not found");

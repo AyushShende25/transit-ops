@@ -8,6 +8,7 @@ import {
 	uuid,
 	varchar,
 } from "drizzle-orm/pg-core";
+import { ROLES } from "../constants";
 
 // Entities: Users, Roles, Vehicles, Drivers, Trips, Maintenance Logs, Fuel Logs, Expenses
 // Roles: Fleet Manager, Driver, Safety Officer, Financial Analyst
@@ -22,12 +23,7 @@ const timestamps = {
 		.$onUpdate(() => new Date()),
 };
 
-export const roleEnum = pgEnum("role", [
-	"FLEET_MANAGER",
-	"DRIVER",
-	"SAFETY_OFFICER",
-	"FINANCIAL_ANALYST",
-]);
+export const roleEnum = pgEnum("role", ROLES);
 
 export const usersTable = pgTable("users", {
 	id: uuid("id").primaryKey().defaultRandom(),

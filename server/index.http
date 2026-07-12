@@ -2,3 +2,28 @@
 
 ### Health Check
 {{baseUrl}}/health
+
+### Register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email":"test@test.com",
+  "name":"testuser",
+  "password":"test1234",
+  "role":"DRIVER"
+}
+
+### Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email":"test@test.com",
+  "password":"test1234"
+}
+
+
+
+### Logout
+POST {{baseUrl}}/api/auth/logout
